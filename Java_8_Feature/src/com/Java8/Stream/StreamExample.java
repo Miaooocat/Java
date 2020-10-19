@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamExample {
@@ -55,18 +57,28 @@ public class StreamExample {
 		System.out.println(combinedPersonList);
 		// Max and mini
 		combinedPersonList.stream()
-				.max(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);;
+		.max(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);;
 		combinedPersonList.stream()
-				.min(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);
-		
+		.min(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);
+
 		long count = combinedPersonList.stream().filter(s1 -> s1.getAge() < 45).count();
 		System.out.println(count);
-		
-		// 0 是初始值 
+
+		// Reduce Example 1 
 		Integer reduce = Stream.of(1, 2, 3, 4).reduce(0, (acc, x) -> acc+ x);
-        System.out.println(reduce);
-        
-        
-		
+		System.out.println(reduce);
+
+		// Reduce Example 2
+		OptionalInt reduced1 =
+				IntStream.range(0, 10)
+				.reduce((a, b) -> a + b);
+		System.out.println(reduced1.getAsInt());
+
+		int reduced2 =
+				IntStream.range(0, 10)
+				.reduce(7, (a, b) -> a + b);
+		System.out.println(reduced2);
+
+
 	}
 }
