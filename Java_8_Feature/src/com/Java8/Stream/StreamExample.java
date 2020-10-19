@@ -53,15 +53,20 @@ public class StreamExample {
 		List<Person> combinedPersonList = Stream.of(personList,newList)
 				.flatMap(persons -> persons.stream()).collect(Collectors.toList());
 		System.out.println(combinedPersonList);
-
+		// Max and mini
 		combinedPersonList.stream()
-				.max(Comparator.comparing(stu -> stu.getAge())).ifPresent(System.out::println);;
+				.max(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);;
 		combinedPersonList.stream()
-				.min(Comparator.comparing(stu -> stu.getAge())).ifPresent(System.out::println);
+				.min(Comparator.comparing(person -> person.getAge())).ifPresent(System.out::println);
 		
 		long count = combinedPersonList.stream().filter(s1 -> s1.getAge() < 45).count();
 		System.out.println(count);
 		
+		// 0 是初始值 
+		Integer reduce = Stream.of(1, 2, 3, 4).reduce(0, (acc, x) -> acc+ x);
+        System.out.println(reduce);
+        
+        
 		
 	}
 }
